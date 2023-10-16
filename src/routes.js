@@ -5,9 +5,9 @@ import customers from './app/controllers/CustomersControllers';
 const routes = new Router();
 
 routes.get('/customers', customers.index);
-routes.get('/customers/:id', customers.show);
-routes.post('/customers', customers.create);
-routes.put('/customers/:id', customers.updade);
-routes.delete('/customers/:id', customers.destroy);
+// routes.get('/customers/:id', customers.show);
+// routes.post('/customers', customers.create);
+// routes.put('/customers/:id', customers.updade);
+// routes.delete('/customers/:id', customers.destroy);
 
 export default routes;

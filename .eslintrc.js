@@ -26,5 +26,8 @@ module.exports = {
     'no-param-reassign': 'off',
     camelcase: 'off',
     'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
+    'no-console': ['error', { allow: ['warn', 'erro', 'log'] }],
+    // radix: 'off',
   },
+  'import/no-extraneous-dependencies': ['error', { devDependencies: true, optionalDependencies: false, peerDependencies: false }],
 };
