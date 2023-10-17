@@ -10,11 +10,11 @@ class Contact extends Model {
       },
       {
         sequelize,
-        modelName: 'Contacts',
+        modelName: 'Contact',
       }
     );
   }
-  static associations(models) {
+  static associate(models) {
     this.belongsTo(models.Customer, { foreignKey: 'customer_id' });
   }
 }

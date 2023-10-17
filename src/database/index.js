@@ -12,6 +12,7 @@ class Database {
   constructor() {
     this.connection = new Sequelize(config);
     this.init();
+    this.associate();
   }
 
   init() {
@@ -21,7 +22,7 @@ class Database {
   associate() {
     models.forEach((model) => {
       if (model.associate) {
-        model.associate(this.connection.model);
+        model.associate(this.connection.models);
       }
     });
   }

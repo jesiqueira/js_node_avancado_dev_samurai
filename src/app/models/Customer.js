@@ -1,4 +1,4 @@
-import Sequelize, { Model } from 'sequelize';
+import Sequelize, { Model, Op } from 'sequelize';
 
 class Customer extends Model {
   static init(sequelize) {
@@ -10,11 +10,32 @@ class Customer extends Model {
       },
       {
         sequelize,
-        modelName: 'Customers'
+        modelName: 'Customer',
+        scopes:{
+            active: {
+                where:{
+                    status : 'ACTIVE'
+                }
+            },
+            samurai:{
+                where:{
+                    name: 'Dev Samurai'
+                }
+            }
+        },
+        created(date){
+            return {
+                where: {
+                    createdAt:{
+                        [Op.gte]: date,
+                    }
+                }
+            }
+        }
       }
     );
   }
-  static associations(models) {
+  static associate(models) {
     this.hasMany(models.Contact);
   }
 }
