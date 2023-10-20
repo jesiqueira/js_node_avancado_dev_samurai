@@ -10,28 +10,31 @@ class Customer extends Model {
       },
       {
         sequelize,
-        modelName: 'Customer',
-        scopes:{
-            active: {
-                where:{
-                    status : 'ACTIVE'
-                }
-            },
-            samurai:{
-                where:{
-                    name: 'Dev Samurai'
-                }
-            }
+        name: {
+          singular: 'customer',
+          plural: 'customers',
         },
-        created(date){
-            return {
-                where: {
-                    createdAt:{
-                        [Op.gte]: date,
-                    }
-                }
-            }
-        }
+        scopes: {
+          active: {
+            where: {
+              status: 'ACTIVE',
+            },
+          },
+          samurai: {
+            where: {
+              name: 'Dev Samurai',
+            },
+          },
+        },
+        created(date) {
+          return {
+            where: {
+              createdAt: {
+                [Op.gte]: date,
+              },
+            },
+          };
+        },
       }
     );
   }
