@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import Customer from '../models/Customer';
 
 // const customers = [
@@ -9,13 +10,33 @@ import Customer from '../models/Customer';
 class CustomersController {
   // listagem dos registros
   async index(req, res) {
-    const data = await Customer.findAll({ limit: 1000 });
-    return res.json(data);
-    // try {
-    // } catch (error) {
-    //   console.error(error);
-    //   return res.status(500).json({ error: 'Internal server error' });
-    // }
+    const { name, email, status, createdBefore, createdAfter, updatedBefore, uṕdatedAfter, sort } = req.query;
+
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 25;
+
+    // localhost:3000/customers?createdAfter=2059-12-13
+    // localhost:3000/customers?page2&limit=25
+    // 250 registro (10 paginas)
+    // pg 2 (25 - 50)
+
+    let where = {};
+    if (name) {
+      where = {
+        ...where,
+        name: {
+          [Op.iLike]: name,
+        },
+      };
+    }
+
+    try {
+      const data = await Customer.findAll({ limit: 1000 });
+      return res.json(data);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
   }
 
   //   // Recupera um Customer
