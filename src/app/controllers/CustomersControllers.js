@@ -29,6 +29,24 @@ class CustomersController {
         },
       };
     }
+    if (email) {
+      where = {
+        ...where,
+        email: {
+          [Op.iLike]: email,
+        },
+      };
+    }
+
+    // localhost:3000/customers?status=active,archived
+    if (status) {
+      where = {
+        ...where,
+        status: {
+          [Op.in]: ['ACTIVE', 'ARCHIVED'],
+        },
+      };
+    }
 
     try {
       const data = await Customer.findAll({ limit: 1000 });
